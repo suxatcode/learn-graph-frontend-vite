@@ -24,11 +24,11 @@ import {
   DialogueStyles,
   TextFieldFormikGeneratorRequired,
   TextFieldFormikGeneratorAutocomplete,
-} from "src/shared/Styles";
+} from "@src/shared/Styles";
 import {
   ForceGraphGraphData,
   ForceGraphNodeObject,
-} from "src/GraphManager/types";
+} from "@src/GraphManager/types";
 import { MarkdownEditorWrapper } from "./MarkdownField";
 
 // TODO(skep): MIN_NODE_DESCRIPTION_LENGTH should be language dependent; for

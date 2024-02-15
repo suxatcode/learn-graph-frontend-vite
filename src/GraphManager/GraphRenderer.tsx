@@ -41,7 +41,7 @@ import { useSubmitVote } from "./hooks/useSubmitVote";
 import { useUpdateNode } from "./hooks/useUpdateNode";
 import { useDeleteNode } from "./hooks/useDeleteNode";
 import { useDeleteEdge } from "./hooks/useDeleteEdge";
-import { useUserDataContext } from "src/UserDataContext";
+import { useUserDataContext } from "@src/UserDataContext";
 import {
   ZoomControlPanel,
   makeZoomControl,
