@@ -1,30 +1,63 @@
-# React + TypeScript + Vite
+# React Force Graph
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+See
 
-Currently, two official plugins are available:
+- [learngraph.org](https://learngraph.org/),
+- [about us](https://learngraph.org/about).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Development
 
-## Expanding the ESLint configuration
+### Development Envorinment
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+We develop on linux. Windows with WSL is possible but we will not offer support
+with WSL problems & project setup.
 
-- Configure the top-level `parserOptions` property like this:
+First setup a pre-commit hook via
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
+```sh
+yarn init-git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+This will run tests, linter and auto-formatter before every commit.
+
+### Running the Application
+
+Start the frontend as standalone app
+
+```sh
+npm run dev
+```
+
+Or run it in a docker container
+
+```sh
+docker-compose up
+```
+
+If the backend is started in the same way, communication is possible without
+additional configuration.
+
+### Architecture
+
+We use [Vite](https://vitejs.dev/).
+
+### Testing
+
+Run the tests via
+
+```sh
+yarn test
+# or
+yarn test-watch
+```
+
+Framework: We use jest, and @testing-library/react.
+
+Approach: All logic should be tested, including null-coalescing with
+"??"-operator. If inline logic is written inside a component, that component
+should be rendered in a test.
+
+### Production
+
+Compilation via 2 stage [Dockerfile](./Dockerfile).
+Image is build and pushed to hub.docker.com via [github action](.github/workflows/release.yml).
