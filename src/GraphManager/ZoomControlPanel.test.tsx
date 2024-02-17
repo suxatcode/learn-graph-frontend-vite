@@ -12,6 +12,7 @@ jest.mock("./Zoom", () => ({
   zoomStep: jest.fn(),
   ZoomDirection: { In: "In", Out: "Out" },
 }));
+import { zoomStep } from "./Zoom";
 
 describe("makeZoomControl", () => {
   let ctrl: Controller;
@@ -47,7 +48,7 @@ describe("makeZoomControl", () => {
     expect(
       ctrl.forceGraphRef.current?.d3ReheatSimulation,
     ).toHaveBeenCalledTimes(1);
-    expect(require("./Zoom").zoomStep).toHaveBeenLastCalledWith(
+    expect(zoomStep).toHaveBeenLastCalledWith(
       { direction: "In", steps: 1 },
       zoomState,
     );
@@ -72,7 +73,7 @@ describe("makeZoomControl", () => {
       ctrl.zoom.zoomLevel - 1,
     );
     expect(ctrl.forceGraphRef.current?.d3ReheatSimulation).toHaveBeenCalled();
-    expect(require("./Zoom").zoomStep).toHaveBeenLastCalledWith(
+    expect(zoomStep).toHaveBeenLastCalledWith(
       { direction: "Out", steps: 1 },
       zoomState,
     );
@@ -80,7 +81,8 @@ describe("makeZoomControl", () => {
 
   it("should do nothing if zooming out while on min zoom level", () => {
     ctrl.zoom.zoomLevel = ZOOM_LEVEL_MIN;
-    const zoomStepMock = require("./Zoom").zoomStep;
+    const zoomStepMock = zoomStep;
+    // @ts-ignore
     const zoomStepMockPreviousCalls = zoomStepMock.mock.calls.length;
     zoomCtrl.onZoomOut();
     expect(ctrl.zoom.setZoomStepStack).not.toHaveBeenCalled();
@@ -91,7 +93,8 @@ describe("makeZoomControl", () => {
 
   it("should do nothing if zooming in while on max zoom level", () => {
     ctrl.zoom.zoomLevel = ZOOM_LEVEL_MAX;
-    const zoomStepMock = require("./Zoom").zoomStep;
+    const zoomStepMock = zoomStep;
+    // @ts-ignore
     const zoomStepMockPreviousCalls = zoomStepMock.mock.calls.length;
     zoomCtrl.onZoomIn();
     expect(ctrl.zoom.setZoomStepStack).not.toHaveBeenCalled();

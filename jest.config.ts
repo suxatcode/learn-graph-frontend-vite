@@ -6,7 +6,6 @@ export default {
   },
   moduleNameMapper: {
     "^@src/(.*)$": "<rootDir>/src/$1",
-    "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__mocks__/fileMock.js",
   },
   rootDir: ".",
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
